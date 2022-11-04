@@ -10,6 +10,7 @@
 
 }
 
+<!-- Nuevo cambio a implementar -->
 <html lang="es">
 <head>
     <link href="~/Scripts/assets/css/chosen.min.css" rel="stylesheet" />
@@ -72,11 +73,11 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", @readonly = "readonly" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", style = "display: none;" })
+                        @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", style = "display: none;" })
                         }
                     </div>
                 </div>
@@ -86,14 +87,14 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
                         }
                         else
                         {
 
-                            @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
-                            @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
+                        @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
                         }
 
                     </div>
@@ -104,13 +105,13 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                        @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
                         }
 
                     </div>
@@ -122,13 +123,13 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
-                            @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
+                        @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
                         }
 
                     </div>
@@ -145,11 +146,11 @@
                                 {
                                     if (Model != null && documento.Iddocumento == Model.Iddocumento)
                                     {
-                                        <option selected="selected" value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
+                                <option selected="selected" value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
                                     }
                                     else
                                     {
-                                        <option value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
+                                <option value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
                                     }
 
                                 }
@@ -163,13 +164,13 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                        @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
                         }
 
                     </div>
@@ -180,13 +181,13 @@
                     <div class="col-sm-10">
                         @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
                         {
-                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.direccion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
                         }
                         else
                         {
-                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isAlphabetKey(event)" })
-                            @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isAlphabetKey(event)" })
+                        @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
                         }
 
                     </div>
@@ -203,11 +204,11 @@
                                     {
                                         if (Model != null && estado.Idestado == Model.Idestado)
                                         {
-                                            <option selected="selected" value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
+                                <option selected="selected" value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
                                         }
                                         else
                                         {
-                                            <option value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
+                                <option value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
                                         }
 
                                     }
