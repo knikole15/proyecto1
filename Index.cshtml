@@ -7,25 +7,27 @@
     List<Proyecto.Models.Estado> estados = (List<Proyecto.Models.Estado>)ViewBag.Estados;
 }
 
+     <!-- Modal -->
+
 <html lang="es">
 <head>
-    <style>
-        .centrado-porcentual {
-            height: 50%;
-            width: 100%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-        }
-    </style>
+    <!--  <style>
+            .centrado-porcentual {
+                height: 50%;
+                width: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+            }
+        </style> -->
 </head>
 
-<body>
+    <body>
 
 
-    <!-- Modal -->
+        <!-- Modal -->
     <div class="modal fade" id="myModalCompaniaIndex" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -110,20 +112,20 @@
                                 {
                                     var compania = Model[i];
 
-                                    <tr>
-                                        <td>@Html.DisplayFor(x => compania.Idcompania)</td>
-                                        <td>@Html.DisplayFor(x => compania.nombre_impuesto)</td>
-                                        <td>@Html.DisplayFor(x => compania.valor_impuesto)</td>
-                                        <td>@Html.DisplayFor(x => compania.descripcion)</td>
+                            <tr>
+                                <td>@Html.DisplayFor(x => compania.Idcompania)</td>
+                                <td>@Html.DisplayFor(x => compania.nombre_impuesto)</td>
+                                <td>@Html.DisplayFor(x => compania.valor_impuesto)</td>
+                                <td>@Html.DisplayFor(x => compania.descripcion)</td>
 
-                                        <td>
-                                            @{
+                                <td>
+                                    @{
                                                 if (documentos != null)
                                                 {
                                                     var documento = documentos.FirstOrDefault(m => m.Iddocumento == compania.Iddocumento);
                                                     if (documento != null)
                                                     {
-                                                        @documento.descripcion
+                                        @documento.descripcion
                                                     }
                                                     else
                                                     {
@@ -131,21 +133,21 @@
                                                     }
                                                 }
 
-                                            }
-                                        </td>
+                                    }
+                                </td>
 
 
-                                        <td>@Html.DisplayFor(x => compania.numero_documento)</td>
-                                        <td>@Html.DisplayFor(x => compania.direccion)</td>
+                                <td>@Html.DisplayFor(x => compania.numero_documento)</td>
+                                <td>@Html.DisplayFor(x => compania.direccion)</td>
 
-                                        <td>
-                                            @{
+                                <td>
+                                    @{
                                                 if (estados != null)
                                                 {
                                                     var estado = estados.FirstOrDefault(m => m.Idestado == compania.Idestado);
                                                     if (estado != null)
                                                     {
-                                                        @estado.descripcion
+                                        @estado.descripcion
                                                     }
                                                     else
                                                     {
@@ -153,16 +155,16 @@
                                                     }
                                                 }
 
-                                            }
-                                        </td>
+                                    }
+                                </td>
 
 
 
-                                        <td style="text-align:center">
-                                            <button id="btn-edit" class="btn btn-primary btn-xs" onclick="btnEditar(@compania.Idcompania)">Editar</button>
-                                        </td>
+                                <td style="text-align:center">
+                                    <button id="btn-edit" class="btn btn-primary btn-xs" onclick="btnEditar(@compania.Idcompania)">Editar</button>
+                                </td>
 
-                                    </tr>
+                            </tr>
                                 }
                             }
 
@@ -174,7 +176,7 @@
         </div>
     </div>
 
-</body>
+    </body>
 </html>
 
 <script>
