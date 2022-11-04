@@ -1,0 +1,315 @@
+﻿
+
+@using System.Web.Optimization;
+
+@model Proyecto.Models.Compania
+
+@{
+    List<Proyecto.Models.Documento> documentos = (List<Proyecto.Models.Documento>)ViewBag.Documentos;
+    List<Proyecto.Models.Estado> estados = (List<Proyecto.Models.Estado>)ViewBag.Estados;
+
+}
+
+<html lang="es">
+<head>
+    <link href="~/Scripts/assets/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/Scripts/assets/js/chosen.jquery.min.js"></script>
+
+    <style>
+        .centrado-porcentual {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="Loading" class="centrado-porcentual" style="display:none; text-align:center;"></div>
+    <div id="VerListado" class="box box-info">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModalCompaniaEdit" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#337ab7;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle" style="color:white;"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id="myModalBody" style="color:lightslategrey;"></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
+        <div class="page-header">
+            <h1>
+                Compa&ntilde;&iacute;a
+                <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Mantenimiento
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <!-- form start -->
+        <form id="editFormCompania" class="form-horizontal">
+            <hr />
+            <div class="container-fluid" style="width:100%;">
+                <div class="form-group">
+                    <label for="Idcompania" class="col-sm-2 control-label" style="text-align:left; ">Id:</label>
+
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Idcompania, new { @class = "form-control", style = "display: none;" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre_impuesto" class="col-sm-2 control-label" style="text-align:left; ">Nombre Compa&ntilde;&iacute;a:</label>
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+
+                            @Html.TextBoxFor(m => m.nombre_impuesto, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
+                            @Html.ValidationMessageFor(m => m.nombre_impuesto, "", new { @class = "text-danger" })
+                        }
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valor_impuesto" class="col-sm-2 control-label" style="text-align:left; ">Valor Impuesto:</label>
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.valor_impuesto, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            @Html.ValidationMessageFor(m => m.valor_impuesto, "", new { @class = "text-danger" })
+                        }
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="descripcion" class="col-sm-2 control-label" style="text-align:left; ">Descripci&oacute;n:</label>
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.descripcion, new { @class = "form-control", @onkeypress = "return isAlphabetKey(event)" })
+                            @Html.ValidationMessageFor(m => m.descripcion, "", new { @class = "text-danger" })
+                        }
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Iddocumento" class="col-sm-2 control-label" style="text-align:left; ">Documento:</label>
+                    <div class="col-sm-10">
+                        <select id="Iddocumento" name="Iddocumento" class="chosen-select">
+                            @{
+
+                                foreach (var documento in documentos)
+                                {
+                                    if (Model != null && documento.Iddocumento == Model.Iddocumento)
+                                    {
+                                        <option selected="selected" value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@documento.Iddocumento" label="@documento.descripcion">@documento.descripcion</option>
+                                    }
+
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numero_documento" class="col-sm-2 control-label" style="text-align:left; ">Num. Documento:</label>
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.numero_documento, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            @Html.ValidationMessageFor(m => m.numero_documento, "", new { @class = "text-danger" })
+                        }
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="col-sm-2 control-label" style="text-align:left; ">Direcci&oacute;n:</label>
+                    <div class="col-sm-10">
+                        @if (Model != null && Model.Idcompania != 0 && !string.IsNullOrEmpty(Convert.ToString(Model.Idcompania)))
+                        {
+                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isAlphabetKey(event)" })
+                            @Html.ValidationMessageFor(m => m.direccion, "", new { @class = "text-danger" })
+                        }
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado" class="col-sm-2 control-label" style="text-align:left; ">Estado:</label>
+                    <div class="col-sm-10">
+                        <select id="Idestado" name="Idestado" class="chosen-select">
+                            @{
+                                if (estados != null)
+                                {
+                                    foreach (var estado in estados)
+                                    {
+                                        if (Model != null && estado.Idestado == Model.Idestado)
+                                        {
+                                            <option selected="selected" value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@estado.Idestado" label="@estado.descripcion">@estado.descripcion</option>
+                                        }
+
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <table style="width:100%;">
+                    <tbody>
+                        <tr style="width:100%;">
+                            <td style="width:89%; text-align:right;">
+                                <button id="btnSave" type="button" class="btn btn-success">
+                                    <i class="fa fa-save"></i>&nbsp;Guardar
+                                </button>
+                            </td>
+                            <td style="width:10%; text-align:right;">
+                                <button id="btnCancel" type="button" class="btn btn-danger">&nbsp;Cancelar</button>
+                            </td>
+                            <td style="width:1%; text-align:right;">
+                                &nbsp;&nbsp;
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+
+</body>
+</html>
+
+<script src="~/Scripts/Compania/edit.js"></script>
+
+<script type="text/javascript">
+
+    function isAlphabetKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if ((charCode <= 93 && charCode >= 65) || (charCode <= 122 && charCode >= 97) || (charCode == 32)) {
+            return true;
+        }
+        return false;
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if ((charCode >= 48 && charCode <= 57)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    function showModalCompaniaEdit(valor) {
+        event.preventDefault();
+        if (valor == "SI") {
+            $("#myModalTitle").text('Mensaje de Sistema');
+            $("#myModalBody").text('Datos ingresados correctamente');
+        } else if (valor == "EDITAR") {
+            $("#myModalTitle").text('Mensaje de Sistema');
+            $("#myModalBody").text('Datos actualizados correctamente');
+        } else if (valor == "NO") {
+            $("#myModalTitle").text('Mensaje de Sistema');
+            $("#myModalBody").text('Datos incorrectos, verifique información');
+        } else {
+            $("#myModalTitle").text('Sin Mensaje');
+            $("#myModalBody").text('Sin Detalle');
+        }
+        $("#myModalCompaniaEdit").modal("show");
+    }
+
+    if (!ace.vars['touch']) {
+        $('.chosen-select').chosen({ allow_single_deselect: true });
+        //resize the chosen on window resize
+
+        $(window)
+            .off('resize.chosen')
+            .on('resize.chosen', function () {
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            }).trigger('resize.chosen');
+        //resize chosen on sidebar collapse/expand
+        $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+            if (event_name != 'sidebar_collapsed') return;
+            $('.chosen-select').each(function () {
+                var $this = $(this);
+                $this.next().css({ 'width': $this.parent().width() });
+            })
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $('.chosen-container').each(function () {
+        this.style.setProperty('width', '100%', 'important');
+    });
+</script>
